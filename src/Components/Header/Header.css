@@ -1,0 +1,34 @@
+.header{
+    background: #4E9F3D;
+    height: 5rem;
+}
+
+.header-container{
+    height: 100%;
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-logo p {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: white;
+}
+
+.header-buttons a{
+    background: white;
+    color: black;
+    font-weight: 500;
+    border: none;
+    margin-left: 1rem;
+    font-size: 1rem;
+    padding: .5rem 2rem;
+    transition: var(--transition);
+}
+
+.header-buttons a:hover{
+    transform: scale(1.05);
+}

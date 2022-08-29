@@ -3,7 +3,9 @@ import './Banner.css'
 
 const Banner = () => {
   return (
-    <div>Banner</div>
+    <section className='banner'>
+      
+    </section>
   )
 }
 
