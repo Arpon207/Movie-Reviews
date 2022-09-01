@@ -1,0 +1,31 @@
+.review-card{
+    border: 1px solid #4E9F3D;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+}
+
+.reviewer-info {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    color:#4E9F3D;
+}
+
+.logo{
+    font-size: 1.3rem;
+    color: white;
+    height: 2.5rem ;
+    width: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #3F3351;
+}
+
+.review-card>P{
+    color: white;
+    padding-left: 3rem;
+    margin-top: 0.5rem;
+}
