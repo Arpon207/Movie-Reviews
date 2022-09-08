@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Reviews.css";
-import useFetch from "./../../Hooks/useFetch";
 import Review from "../Review/Review";
+import { useState } from "react";
 
 const Reviews = () => {
-    const { reviews, setReviews } = useFetch();
+    const [reviews, setReviews] = useState([]);
+    useEffect(() => {
+        fetch("http://localhost:5000/reviews")
+            .then((res) => res.json())
+            .then((data) => setReviews(data));
+    }, []);
+
+    console.log(reviews);
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const Name = e.target.name.value;
@@ -20,10 +28,12 @@ const Reviews = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-                const newReviews = [...reviews, data];
+                const newReviews = [...reviews, user];
                 setReviews(newReviews);
+                e.target.reset();
             });
     };
+
     return (
         <section className="reviews">
             <div className="reivews-container">
@@ -47,7 +57,7 @@ const Reviews = () => {
                 </div>
                 <div className="reviews-card-container">
                     {reviews.map((review) => (
-                        <Review key={review.id} review={review} />
+                        <Review key={review._id} review={review} />
                     ))}
                 </div>
             </div>

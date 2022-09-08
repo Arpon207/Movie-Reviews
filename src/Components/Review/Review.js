@@ -1,8 +1,8 @@
 import React from "react";
 import "./Review.css";
 
-const Review = ({review}) => {
-    const {Name, date} = review; 
+const Review = ({ review }) => {
+    const { Name, date } = review;
     return (
         <div className="review-card">
             <div className="reviewer-info">
