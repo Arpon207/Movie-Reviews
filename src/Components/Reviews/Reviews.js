@@ -9,9 +9,9 @@ const Reviews = () => {
         e.preventDefault();
         const Name = e.target.name.value;
         const review = e.target.review.value;
-        const date = "21/01/2022"
+        const date = "21/01/2022";
         const user = { Name, review, date };
-        fetch("http://localhost:5000/review", {
+        fetch("http://localhost:5000/reviews", {
             method: "POST",
             headers: {
                 "content-type": "application/json",
