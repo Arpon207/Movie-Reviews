@@ -1,46 +1,45 @@
-
-.reivews-container{
+.reivews-container {
     width: 80%;
     margin: 0 auto;
     text-align: left;
 }
 
-.reivews-container h1{
+.reivews-container h1 {
     font-size: 2.5rem;
     color: white;
     font-weight: 500;
 }
 
-.reivews-container .tab{
+.reivews-container .tab {
     margin-top: 1rem;
     font-size: 1.2rem;
     display: flex;
     gap: 2rem;
 }
 
-.tab p{
+.tab p {
     position: relative;
 }
 
-.tab p:last-child{
+.tab p:last-child {
     color: white;
 }
 
-.active-tab{
-    color: #4E9F3D;
+.active-tab {
+    color: #4e9f3d;
 }
 
-.active-tab::after{
+.active-tab::after {
     content: "";
     width: 100%;
     height: 1px;
-    background-color: #4E9F3D;
+    background-color: #4e9f3d;
     position: absolute;
     bottom: -5px;
     left: 0;
 }
 
-.add-review{
+.add-review {
     width: 70%;
     margin-top: 3rem;
 }
@@ -52,30 +51,62 @@
     margin-bottom: 1rem;
 }
 
-.add-review input, 
-.add-review textarea {    
+input,
+textarea {
     display: block;
     width: 100%;
     font-size: 1.1rem;
-    padding: .5rem;
+    padding: 0.5rem;
     margin-bottom: 1rem;
-    background-color: #3F3351;
+    background-color: #3f3351;
     border: none;
     outline: none;
     color: white;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     resize: none;
 }
 
-.add-review button{
+.add-review button,
+.edit-window button {
     font-size: 1.1rem;
-    padding: .5rem 2rem;
-    background-color: #4E9F3D;
+    padding: 0.5rem 2rem;
+    background-color: #4e9f3d;
     color: white;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
 }
 
-.reviews-card-container{
+.reviews-card-container {
     margin: 2rem 0;
 }
 
+.edit-window {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-window div {
+    width: 80%;
+    background-color: white;
+    height: 30vh;
+    border-radius: 1rem;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.edit-window div form {
+    width: 100%;
+}
+
+#cancel-btn {
+    margin-right: 1rem;
+    background-color: gray;
+}

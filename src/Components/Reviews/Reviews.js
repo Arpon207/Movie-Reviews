@@ -5,13 +5,32 @@ import { useState } from "react";
 
 const Reviews = () => {
     const [reviews, setReviews] = useState([]);
+    const [show, setShow] = useState(false);
+    const [selectedReview, setSelectedReview] = useState({
+        id: "",
+        review: "",
+    });
     useEffect(() => {
         fetch("http://localhost:5000/reviews")
             .then((res) => res.json())
             .then((data) => setReviews(data));
     }, []);
 
-    console.log(reviews);
+    const handleDelete = (id) => {
+        const url = `http://localhost:5000/reviews/${id}`;
+        fetch(url, {
+            method: "DELETE",
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.deletedCount > 0) {
+                    const remainingReviews = reviews.filter(
+                        (review) => review._id !== id
+                    );
+                    setReviews(remainingReviews);
+                }
+            });
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -28,9 +47,49 @@ const Reviews = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-                const newReviews = [...reviews, user];
-                setReviews(newReviews);
+                if (data.acknowledged === true) {
+                    user._id = data.insertedId;
+                    const newReviews = [...reviews, user];
+                    setReviews(newReviews);
+                }
                 e.target.reset();
+            });
+    };
+
+    const handleShow = (review, id) => {
+        setShow(!show);
+        setSelectedReview({
+            id: id,
+            review: review,
+        });
+    };
+
+    const handleSubmitEditedReview = (e) => {
+        e.preventDefault();
+        const reviewInput = e.target.review.value;
+        const review = { reviewInput };
+
+        const url = `http://localhost:5000/reviews/${selectedReview.id}`;
+        fetch(url, {
+            method: "PUT",
+            body: JSON.stringify(review),
+            headers: {
+                "content-type": "application/json",
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.modifiedCount > 0) {
+                    const modifiedReview = reviews.find(
+                        (review) => review._id === selectedReview.id
+                    );
+                    modifiedReview.review = reviewInput;
+                    const rest = reviews.filter(
+                        (review) => review._id !== selectedReview.id
+                    );
+                    setReviews([...rest, modifiedReview]);
+                    setShow(false);
+                }
             });
     };
 
@@ -57,10 +116,37 @@ const Reviews = () => {
                 </div>
                 <div className="reviews-card-container">
                     {reviews.map((review) => (
-                        <Review key={review._id} review={review} />
+                        <Review
+                            key={review._id}
+                            review={review}
+                            handleDelete={handleDelete}
+                            handleShow={handleShow}
+                        />
                     ))}
                 </div>
             </div>
+            {show === true && (
+                <div className="edit-window">
+                    <div>
+                        <form onSubmit={handleSubmitEditedReview}>
+                            <textarea
+                                name="review"
+                                id=""
+                                rows="10"
+                                placeholder="Review"
+                                defaultValue={selectedReview.review}
+                            ></textarea>
+                            <button
+                                onClick={() => setShow(false)}
+                                id="cancel-btn"
+                            >
+                                Cancel
+                            </button>
+                            <button type="submit">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+            )}
         </section>
     );
 };
